@@ -1,0 +1,130 @@
+#sidebar {
+    background-color: #e6edf4;
+    color: #003366;
+}
+
+#content {
+    background-color: #f5f8fb;
+    color: #003366;
+}
+         
+QPushButton#sidebarButton {
+    background-color: #cfd8e3;
+    border: none;
+    border-radius: 6px;
+    height: 40px;
+    color: #003366;
+}
+
+QPushButton#sidebarButton:hover {
+    background-color: #b3c6d9; 
+    transform: scale(1.03);
+}
+
+
+#systemTime {
+    font-weight: bold;
+    color: #003366;
+}
+
+#welcomeFrame {
+    background-color: #BFE2F5;
+    border-radius: 10px;
+    color: #003366;
+}
+
+QPushButton#mainActionButton {
+    background-color: #75C2EB;
+    border: none;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #003366;
+    min-width: 400px;
+    min-height: 200px;
+}
+
+#updatesFrame {
+    background-color:rgb(159, 204, 228);
+    border-radius: 10px;
+    color: #003366;
+}
+
+#sidebar QLabel {
+    color: #004d66;
+}
+
+QLabel {
+    color: #004d66;
+}
+
+#systemTime {
+    color: #004d66;
+}
+
+QPushButton#addNewReading { background-color: #006699; color: white; }
+QPushButton#addNewReading:hover {
+    background-color: #0088cc; 
+    transform: scale(1.02);
+}
+QPushButton#readingsAndReports { background-color: #009999; color: #002233; }
+QPushButton#readingsAndReports:hover {
+    background-color: #00b3b3; 
+    transform: scale(1.02);
+}
+
+QLineEdit {
+    background-color:rgb(194, 205, 210);
+    color: #002233;
+    border: none;
+    border-radius: 6px;
+    padding: 6px 10px;
+}
+#updatesFrame QListWidget {
+    background-color: #cceeff;
+    color:rgb(10, 73, 105);
+    border: none;
+    border-radius: 6px;
+    padding: 6px;
+}
+
+
+QDialog {
+    background-color:rgb(37, 125, 131);
+    color:rgb(38, 59, 61);
+    border-radius: 10px;
+}
+
+QTableWidget, QTableView {
+    background-color: #95babd;
+    color: white;
+    gridline-color:rgb(11, 37, 46);
+    selection-background-color: #00b3b3;  
+    selection-color:rgb(16, 98, 95);
+    border: none;
+    border-radius: 6px;
+}
+
+
+QHeaderView::section {
+    background-color: #95babd;
+    color:rgb(55, 98, 93);
+    border: none;
+    padding: 6px;
+}
+#mainStack {
+    background-color: transparent; 
+}
+#dashboardPage {
+    background-color: #f5f8fb;
+    color: #003366;
+    border-radius: 8px;
+    qproperty-autoFillBackground: true;
+}
+
+#settingsPage {
+    background-color: #f0f6fb;
+    color: #003366;
+    border-radius: 8px;
+    qproperty-autoFillBackground: true;
+}

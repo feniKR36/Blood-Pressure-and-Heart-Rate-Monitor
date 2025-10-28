@@ -35,15 +35,15 @@ class addread(QDialog):
         layout.addRow("Context:", self.context_input)
         layout.addRow("Notes:", self.notes_input)
 
-        btn_layout = QHBoxLayout()
-        self.submit_btn = QPushButton("Save")
-        self.cancel_btn = QPushButton("Cancel")
-        btn_layout.addWidget(self.submit_btn)
-        btn_layout.addWidget(self.cancel_btn)
-        layout.addRow(btn_layout)
+        btnlayout = QHBoxLayout()
+        self.submitbtn = QPushButton("Save")
+        self.cancelbtn = QPushButton("Cancel")
+        btnlayout.addWidget(self.submitbtn)
+        btnlayout.addWidget(self.cancelbtn)
+        layout.addRow(btnlayout)
 
-        self.cancel_btn.clicked.connect(self.reject)
-        self.submit_btn.clicked.connect(self.accept)
+        self.cancelbtn.clicked.connect(self.reject)
+        self.submitbtn.clicked.connect(self.accept)
 
     def get_data(self):
         return {
@@ -66,153 +66,151 @@ class VitalTrackerUI(QWidget):
         self.setWindowIcon(QIcon("D:/app/Untitled33.png"))
         self.ui4dash()
 
-        self.add_btn.clicked.connect(self.openread)
+        self.addbtn.clicked.connect(self.openread)
 
         self.patient_service = None
         self.reading_service = None
 
     def ui4dash(self):
-        main_layout = QHBoxLayout(self)
-        main_layout.setContentsMargins(0, 0, 0, 0)
+        mainlayout = QHBoxLayout(self)
+        mainlayout.setContentsMargins(0, 0, 0, 0)
 
         
         self.sidebar = QFrame()
         self.sidebar.setObjectName("sidebar")
         self.sidebar.setFixedWidth(300)
-        sidebar_layout = QVBoxLayout(self.sidebar)
-        sidebar_layout.setAlignment(Qt.AlignmentFlag.AlignTop)
-        sidebar_layout.setContentsMargins(20, 40, 20, 20)
+        sidebar = QVBoxLayout(self.sidebar)
+        sidebar.setAlignment(Qt.AlignmentFlag.AlignTop)
+        sidebar.setContentsMargins(20, 40, 20, 20)
 
         
-        logo_widget = QWidget()
-        logo_layout = QHBoxLayout(logo_widget)
+        logowidhet = QWidget()
+        logolayout = QHBoxLayout(logowidhet)
 
         pixmap = QPixmap("D:/app/Untitled33.png")
-        icon_label = QLabel()
+        iconlbl = QLabel()
         if not pixmap.isNull():
             pixmap = pixmap.scaled(40, 40, Qt.AspectRatioMode.KeepAspectRatio,
                                    Qt.TransformationMode.SmoothTransformation)
-            icon_label.setPixmap(pixmap)
+            iconlbl.setPixmap(pixmap)
 
-        text_label = QLabel("Vital Tracker")
-        text_label.setFont(QFont("Arial Rounded MT", 20, QFont.Weight.Bold))
+        textlabel = QLabel("Vital Tracker")
+        textlabel.setFont(QFont("Arial Rounded MT", 20, QFont.Weight.Bold))
 
-        logo_layout.addWidget(icon_label)
-        logo_layout.addWidget(text_label)
-        logo_layout.setAlignment(Qt.AlignmentFlag.AlignLeft)
+        logolayout.addWidget(iconlbl)
+        logolayout.addWidget(textlabel)
+        logolayout.setAlignment(Qt.AlignmentFlag.AlignLeft)
 
-        sidebar_layout.addWidget(logo_widget)
-        sidebar_layout.addSpacing(60)
+        sidebar.addWidget(logowidhet)
+        sidebar.addSpacing(60)
 
-        self.btn_dashboard = QPushButton("Dashboard")
-        self.btn_settings = QPushButton("Settings")
+        self.btndashboard = QPushButton("Dashboard")
+        self.btnsettings = QPushButton("Settings")
 
-        for btn in [self.btn_dashboard, self.btn_settings]:
+        for btn in [self.btndashboard, self.btnsettings]:
             btn.setObjectName("sidebarButton")
             btn.setFixedHeight(40)
-            sidebar_layout.addWidget(btn)
+            sidebar.addWidget(btn)
 
-        main_layout.addWidget(self.sidebar)
+        mainlayout.addWidget(self.sidebar)
 
         
         self.stack = QStackedWidget()
         self.stack.setObjectName("mainStack")
-        main_layout.addWidget(self.stack)
+        mainlayout.addWidget(self.stack)
 
         
-        self.dashboard_page = QWidget()
-        self.dashboard_page.setObjectName("dashboardPage")
-        dashboard_layout = QVBoxLayout(self.dashboard_page)
-        dashboard_layout.setContentsMargins(20, 20, 20, 20)
-        dashboard_layout.setSpacing(10)
+        self.dashboardpage = QWidget()
+        self.dashboardpage.setObjectName("dashboardPage")
+        dashboardlayout = QVBoxLayout(self.dashboardpage)
+        dashboardlayout.setContentsMargins(20, 20, 20, 20)
+        dashboardlayout.setSpacing(10)
 
         
-        top_bar = QHBoxLayout()
-        self.search_box = QLineEdit()
-        self.search_box.setPlaceholderText("Search for patients here...")
-        self.search_box.setFixedHeight(35)
-        self.system_time = QLabel(datetime.now().strftime("%Y-%m-%d %H:%M"))
-        self.system_time.setAlignment(Qt.AlignmentFlag.AlignRight | Qt.AlignmentFlag.AlignVCenter)
-        self.system_time.setObjectName("systemTime")
+        topbar = QHBoxLayout()
+        self.searchbox = QLineEdit()
+        self.searchbox.setPlaceholderText("Search for patients here...")
+        self.searchbox.setFixedHeight(35)
+        self.systime = QLabel(datetime.now().strftime("%Y-%m-%d %H:%M"))
+        self.systime.setAlignment(Qt.AlignmentFlag.AlignRight | Qt.AlignmentFlag.AlignVCenter)
+        self.systime.setObjectName("systemTime")
 
-        top_bar.addWidget(self.search_box)
-        top_bar.addWidget(self.system_time)
-        dashboard_layout.addLayout(top_bar)
+        topbar.addWidget(self.searchbox)
+        topbar.addWidget(self.systime)
+        dashboardlayout.addLayout(topbar)
 
         
-        self.welcome_frame = QFrame()
-        self.welcome_frame.setObjectName("welcomeFrame")
-        welcome_layout = QVBoxLayout(self.welcome_frame)
+        self.welcomefrm = QFrame()
+        self.welcomefrm.setObjectName("welcomeFrame")
+        welcomelyt = QVBoxLayout(self.welcomefrm)
 
-        welcome_label = QLabel("Welcome back,")
-        welcome_label.setFont(QFont("Arial Rounded MT", 20, QFont.Weight.Bold))
-        welcome_layout.addWidget(welcome_label)
+        welcomelbl = QLabel("Welcome back,")
+        welcomelbl.setFont(QFont("Arial Rounded MT", 20, QFont.Weight.Bold))
+        welcomelyt.addWidget(welcomelbl)
 
-        btn_layout = QHBoxLayout()
+        btnlayout = QHBoxLayout()
 
 
-        self.add_btn = QPushButton("  Add new reading")
-        self.add_btn.setObjectName("addNewReading")
-        self.add_btn.setIcon(QIcon("D:/app/1000006908.png"))  # ← change path to your icon
-        self.add_btn.setIconSize(QtCore.QSize(40, 40))
-        self.add_btn.setFont(QFont("Arial Rounded MT", 20, QFont.Weight.Bold))
+        self.addbtn = QPushButton("  Add new reading")
+        self.addbtn.setObjectName("addNewReading")
+        self.addbtn.setIcon(QIcon("D:/app/1000006908.png")) 
+        self.addbtn.setIconSize(QtCore.QSize(40, 40))
+        self.addbtn.setFont(QFont("Arial Rounded MT", 20, QFont.Weight.Bold))
 
-        self.reports_btn = QPushButton("  Readings and Reports")
-        self.reports_btn.setObjectName("readingsAndReports")
-        self.reports_btn.setIcon(QIcon("D:/app/1000006907.png"))  # ← change path to your icon
-        self.reports_btn.setIconSize(QtCore.QSize(40, 40))
-        self.reports_btn.setFont(QFont("Arial Rounded MT", 20, QFont.Weight.Bold))
+        self.rprtbtn = QPushButton("  Readings and Reports")
+        self.rprtbtn.setObjectName("readingsAndReports")
+        self.rprtbtn.setIcon(QIcon("D:/app/1000006907.png")) 
+        self.rprtbtn.setIconSize(QtCore.QSize(40, 40))
+        self.rprtbtn.setFont(QFont("Arial Rounded MT", 20, QFont.Weight.Bold))
+        
 
-        for b in [self.add_btn, self.reports_btn]:
+        for b in [self.addbtn, self.rprtbtn]:
             b.setFixedSize(400, 200)
 
-        btn_layout.addWidget(self.add_btn)
-        btn_layout.addWidget(self.reports_btn)
-        welcome_layout.addLayout(btn_layout)
-        dashboard_layout.addWidget(self.welcome_frame)
+        btnlayout.addWidget(self.addbtn)
+        btnlayout.addWidget(self.rprtbtn)
+        welcomelyt.addLayout(btnlayout)
+        dashboardlayout.addWidget(self.welcomefrm)
 
         
-        bottom_layout = QHBoxLayout()
-        bottom_layout.setSpacing(20)
+        btmlayout = QHBoxLayout()
+        btmlayout.setSpacing(20)
 
-        self.updates_frame = QFrame()
-        self.updates_frame.setObjectName("updatesFrame")
-        updates_layout = QVBoxLayout(self.updates_frame)
-        updates_label = QLabel("Recent update")
-        updates_label.setFont(QFont("Arial Rounded MT", 16, QFont.Weight.Bold))
-        updates_layout.addWidget(updates_label)
+        self.udframe = QFrame()
+        self.udframe.setObjectName("updatesFrame")
+        updtlayout = QVBoxLayout(self.udframe)
+        updtlabel = QLabel("Recent update")
+        updtlabel.setFont(QFont("Arial Rounded MT", 16, QFont.Weight.Bold))
+        updtlayout.addWidget(updtlabel)
 
-        self.updates_list = QListWidget()
-        updates_layout.addWidget(self.updates_list)
-        self.updates_frame.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding)
-        bottom_layout.addWidget(self.updates_frame, 1)
+        self.udlist = QListWidget()
+        updtlayout.addWidget(self.udlist)
+        self.udframe.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding)
+        btmlayout.addWidget(self.udframe, 1)
 
-        dashboard_layout.addLayout(bottom_layout)
+        dashboardlayout.addLayout(btmlayout)
 
-        #wala nako na add ang update delete na feature sa ui, mybaddddd
-        self.settings_page = QWidget()
-        self.settings_page.setObjectName("settingsPage")
-        settings_layout = QVBoxLayout(self.settings_page)
-        settings_layout.setContentsMargins(20, 20, 20, 20)
-        settings_layout.setSpacing(2)  # smaller spacing between labels
-        settings_layout.setAlignment(Qt.AlignmentFlag.AlignTop)  # keep content at the top
+        self.settingspg = QWidget()
+        self.settingspg.setObjectName("settingsPage")
+        settingslyt = QVBoxLayout(self.settingspg)
+        settingslyt.setContentsMargins(20, 20, 20, 20)
+        settingslyt.setSpacing(2)  #s small space
+        settingslyt.setAlignment(Qt.AlignmentFlag.AlignTop)  
 
-        helpdesk_label = QLabel("Helpdesk")
-        helpdesk_label.setFont(QFont("Arial Rounded MT", 20, QFont.Weight.Bold))
-        settings_layout.addWidget(helpdesk_label, alignment=Qt.AlignmentFlag.AlignTop)
+        helpdesk = QLabel("Helpdesk")
+        helpdesk.setFont(QFont("Arial Rounded MT", 20, QFont.Weight.Bold))
+        settingslyt.addWidget(helpdesk, alignment=Qt.AlignmentFlag.AlignTop)
 
-        helpdesk_info = QLabel("For concerns, please contact vitaltracker@gmail.com")
-        helpdesk_info.setFont(QFont("Arial", 12))
-        settings_layout.addWidget(helpdesk_info, alignment=Qt.AlignmentFlag.AlignTop)
+        helpdeskinfo = QLabel("For concerns, please contact vitaltracker@gmail.com")
+        helpdeskinfo.setFont(QFont("Arial", 12))
+        settingslyt.addWidget(helpdeskinfo, alignment=Qt.AlignmentFlag.AlignTop)
 
-        self.stack.addWidget(self.dashboard_page)
-        self.stack.addWidget(self.settings_page)
+        self.stack.addWidget(self.dashboardpage)
+        self.stack.addWidget(self.settingspg)
 
-        self.btn_dashboard.clicked.connect(lambda: self.stack.setCurrentWidget(self.dashboard_page))
-        self.btn_settings.clicked.connect(lambda: self.stack.setCurrentWidget(self.settings_page))
-        self.stack.setCurrentWidget(self.dashboard_page)
-
-
+        self.btndashboard.clicked.connect(lambda: self.stack.setCurrentWidget(self.dashboardpage))
+        self.btnsettings.clicked.connect(lambda: self.stack.setCurrentWidget(self.settingspg))
+        self.stack.setCurrentWidget(self.dashboardpage)
 
     def openread(self):
         dialog = addread()
@@ -242,3 +240,4 @@ class VitalTrackerUI(QWidget):
 
             except Exception as e:
                 QMessageBox.critical(self, "Error", str(e))
+    

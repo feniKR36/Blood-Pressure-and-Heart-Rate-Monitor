@@ -25,9 +25,9 @@ class MainWindow(VitalTrackerUI): #classparent
         self.recentud()
 
     def connsignals(self):
-        self.add_btn.clicked.connect(self.openread)  #diaforview
-        self.reports_btn.clicked.connect(self.openreadings)
-        self.search_box.textChanged.connect(self.search4patients)
+        self.addbtn.clicked.connect(self.openread)  #diaforview
+        self.rprtbtn.clicked.connect(self.openreadings)
+        self.searchbox.textChanged.connect(self.search4patients)
 
     def openreadings(self):
         readings = self.reading_service.list()
@@ -35,8 +35,8 @@ class MainWindow(VitalTrackerUI): #classparent
         dialog.exec()
 
     def search4patients(self):
-        keyword = self.search_box.text().strip()
-        self.updates_list.clear()
+        keyword = self.searchbox.text().strip()
+        self.udlist.clear()
 
         if not keyword:
             self.recentud()
@@ -44,7 +44,7 @@ class MainWindow(VitalTrackerUI): #classparent
 
         results = self.reading_service.search(keyword)
         if not results:
-            self.updates_list.addItem("No results found.")
+            self.udlist.addItem("No results found.")
         else:
             for r in results:
                 ts = r.timestamp
@@ -53,13 +53,13 @@ class MainWindow(VitalTrackerUI): #classparent
                         ts = datetime.fromisoformat(ts)
                     except:
                         pass
-                self.updates_list.addItem(
+                self.udlist.addItem(
                     f"{r.patientcontext}: {r.bpdisplay} | {r.hrdisplay} | {ts.strftime('%Y-%m-%d %H:%M')}"
                 )
 
     def recentud(self):
         readings = self.reading_service.list()
-        self.updates_list.clear()
+        self.udlist.clear()
 
         for r in readings[:5]:
             ts = r.timestamp
@@ -68,7 +68,7 @@ class MainWindow(VitalTrackerUI): #classparent
                     ts = datetime.fromisoformat(ts)
                 except:
                     ts = datetime.now()
-            self.updates_list.addItem(
+            self.udlist.addItem(
                 f"{r.patientcontext}: {r.bpdisplay} | {r.hrdisplay} | {ts.strftime('%Y-%m-%d %H:%M')}"
             )
 

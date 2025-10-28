@@ -1,12 +1,12 @@
 
-from typing import List
+from typing import List #composit
 from datetime import datetime
 from dataclasses import fields as dataclass_fields
 from .models import Reading, Patient
 
-class ReadingRepo:
+class ReadingRepo:#encap
     def __init__(self, conn):
-        self.conn = conn
+        self.conn = conn#encapsulation + de behaviour [crud under the class] PEROWALANAADDSAUI TT
         self.conn.execute("""
         CREATE TABLE IF NOT EXISTS readings (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -21,7 +21,7 @@ class ReadingRepo:
         )
         """)
 
-    def _parse_timestamp(self, ts):
+    def timestamp(self, ts):
         if isinstance(ts, str):
             try:
                 return datetime.fromisoformat(ts)
@@ -29,7 +29,7 @@ class ReadingRepo:
                 return datetime.now()
         return ts
 
-    def _row_to_reading(self, row):
+    def ROWTOREAD(self, row):
         """
         Convert a DB row (expected to contain columns in this order):
         id, bpsystolic, bpdiastolic, heartrate, patientcontext, timestamp, notes, patient_name, patient_age, patient_sex
@@ -44,7 +44,7 @@ class ReadingRepo:
             "bpdiastolic": row[2],
             "heartrate": row[3],
             "patientcontext": row[4],
-            "timestamp": self._parse_timestamp(row[5]),
+            "timestamp": self.timestamp(row[5]),
             "notes": row[6],
             "patient_name": row[7] if len(row) > 7 else "",
             "patient_age": row[8] if len(row) > 8 else 0,
@@ -83,7 +83,7 @@ class ReadingRepo:
                 """
             ).fetchall()
 
-        return [self._row_to_reading(r) for r in rows] if rows else []
+        return [self.ROWTOREAD(r) for r in rows] if rows else []
 
     def get(self, id_: int) -> Reading | None:
         row = self.conn.execute(
@@ -98,7 +98,7 @@ class ReadingRepo:
             (id_,),
         ).fetchone()
 
-        return self._row_to_reading(row) if row else None
+        return self.ROWTOREAD(row) if row else None
 
     def search(self, keyword: str) -> List[Reading]:
         rows = self.conn.execute(
@@ -114,7 +114,7 @@ class ReadingRepo:
             (f"%{keyword}%", f"%{keyword}%", f"%{keyword}%"),
         ).fetchall()
 
-        return [self._row_to_reading(r) for r in rows] if rows else []
+        return [self.ROWTOREAD(r) for r in rows] if rows else []
 
     def add(self, r: Reading, patientid: int | None = None) -> Reading:
         cur = self.conn.execute(
@@ -127,13 +127,13 @@ class ReadingRepo:
         self.conn.commit()
 
      
-        inserted_row = (
+        insertedrow = (
             cur.lastrowid,
             r.bpsystolic, r.bpdiastolic, r.heartrate,
             r.patientcontext, r.timestamp.isoformat(), r.notes,
             "", 0, ""
         )
-        reading = self._row_to_reading(inserted_row)
+        reading = self.ROWTOREAD(insertedrow)
         return reading
 
     def update(self, r: Reading) -> Reading:

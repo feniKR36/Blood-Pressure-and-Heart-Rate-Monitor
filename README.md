@@ -20,10 +20,10 @@
 # Screenshots
 
 Dashboard View
-<img src="D:/app/1st ss.png" alt="Dashboard Screenshot" width="1100" height="700" />
+<img src="D:\app\1st ss.png" alt="Dashboard Screenshot" width="1100" height="700" />
 
 Add New Reading Window
-<img src="D:/app/2nd ss.png" alt="Add Reading Screenshot" width="1100" height="700" />
+<img src="D:\app\2nd ss.png" alt="Add Reading Screenshot" width="1100" height="700" />
 
 Report and Data Table
-<img src="D:/app/3rd ss.png" alt="Report Screenshot" width="1100" height="700" />
+<img src="D:\app\3rd ss.png" alt="Report Screenshot" width="1100" height="700" />
